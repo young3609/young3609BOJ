@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <cstdio>
+#include <memory.h>
+using namespace std;
+
+int d[31][31];
+
+int main() {
+	
+	int testcase;
+	scanf("%d",&testcase);
+
+	while (testcase--) {
+		memset(d, 0, sizeof(d));
+		int n, m;
+		scanf("%d %d", &n, &m);
+
+		for (int i = 0; i <= m; i++) {
+			d[i][0] = 1;
+			d[i][i] = 1;
+		}
+
+		for (int i = 1; i <= m; i++) {
+			for (int j = 1; j <= m; j++) {
+				d[i][j] = d[i - 1][j - 1] + d[i - 1][j];
+			}
+		}
+
+		printf("%d\n", d[m][n]);
+	}
+	return 0;
+}
