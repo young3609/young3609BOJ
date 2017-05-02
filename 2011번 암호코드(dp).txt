@@ -2,7 +2,6 @@
 #include <string>
 using namespace std;
 #define div 1000000;
-
 long long d[5001];
 
 int main() {
