@@ -1,0 +1,61 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <cstdio>
+using namespace std;
+
+int arr[51][51];
+int dx[4] = {0,-1,0,1};
+int dy[4] = {-1,0,1,0};
+
+int main() {
+
+	int n, m;
+	scanf("%d %d",&n,&m);
+
+	int startx, starty, look;
+	scanf("%d %d %d",&startx,&starty,&look);
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			scanf("%d",&arr[i][j]);
+		}
+	}
+
+	int f = 1;
+	int count = 0;
+	int clean = 0;
+	while (f) {
+		if (!arr[startx][starty]) {
+			clean++;
+		}
+		arr[startx][starty] = 2;
+
+		for (int i = 0; i < 5; i++) {
+			if (i == 4) {
+				int nextx = startx + dx[(look + 3) % 4];
+				int nexty = starty + dy[(look + 3) % 4];
+
+				if (arr[nextx][nexty] != 1) {
+					startx = nextx;
+					starty = nexty;
+				}
+				else {
+					f = 0;
+				}
+					break;			
+			}
+
+			int nextx = startx + dx[look];
+			int nexty = starty + dy[look];
+			look = (look + 3) % 4;
+
+			if (!arr[nextx][nexty]) {
+				startx = nextx;
+				starty = nexty;
+				break;
+			}
+		}
+	}
+	printf("%d\n",clean);
+
+	return 0;
+}
