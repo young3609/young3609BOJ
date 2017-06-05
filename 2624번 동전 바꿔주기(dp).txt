@@ -1,0 +1,33 @@
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include <cstdio>
+using namespace std;
+
+int d[101][10001];
+int value[101];
+int coinmany[101];
+
+int main() {
+
+	int money;
+	scanf("%d",&money);
+
+	int coinnum;
+	scanf("%d",&coinnum);
+
+	for (int i = 1; i <= coinnum; i++) {
+		scanf("%d %d",&value[i],&coinmany[i]);
+	}
+
+	d[0][0] = 1;
+
+	for (int i = 1; i <= coinnum; i++) {
+		for (int j = 0; j <= coinmany[i]; j++) {
+			for (int k = 0; k <= money; k++) {
+				if (k + value[i] * j > money)break;
+				d[i][k + value[i] * j] += d[i - 1][k];
+			}
+		}
+	}
+	printf("%d\n",d[coinnum][money]);
+	return 0;
+}
